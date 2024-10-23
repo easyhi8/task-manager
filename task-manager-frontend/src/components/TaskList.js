@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const TaskList = ({ categoryList }) => {
+const TasksTable = ({ categoryList }) => {
   return (
     <div>
       <p>タスク一覧表</p>
@@ -16,5 +17,19 @@ const TaskList = ({ categoryList }) => {
     </div>
     );
 };
+
+const TaskList = () => {
+  const [tasks, setTasks] = useState();
+
+  useEffect(() => {
+    const getTasks = async () => {
+      const response = await axios.get('/tasks');
+      setTasks(response.data);
+    };
+    getTasks();
+  })
+
+  return <TasksTable categoryList={tasks} />;
+}
 
 export default TaskList;
