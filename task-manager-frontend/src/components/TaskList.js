@@ -1,35 +1,36 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const TasksTable = ({ categoryList }) => {
+const TaskList = () => {
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    const getTasks = async () => {
+      try {
+        const response = await axios.get('/tasks');
+        setTasks(response.data);
+      } catch (err) {
+        console.error("タスク取得時のエラー:");
+      }
+    };
+
+    getTasks();
+  }, []);
+
   return (
     <div>
       <p>タスク一覧表</p>
       <ul>
-          {categoryList.map((val, index) => (
-              <li key={index}>
-                  <div className="task-title">
-                      <span>{val.title}</span>
-                  </div>
-              </li>
-          ))}
+        {tasks.map((task) => (
+          <li key={task.id}>
+            <div className="task-title">
+              <span>{task.title}</span>
+            </div>
+          </li>
+        ))}
       </ul>
     </div>
-    );
-};
-
-const TaskList = () => {
-  const [tasks, setTasks] = useState();
-
-  useEffect(() => {
-    const getTasks = async () => {
-      const response = await axios.get('/tasks');
-      setTasks(response.data);
-    };
-    getTasks();
-  })
-
-  return <TasksTable categoryList={tasks} />;
+  );
 }
 
 export default TaskList;
