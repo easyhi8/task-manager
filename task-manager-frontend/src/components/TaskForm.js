@@ -16,10 +16,10 @@ const TaskForm = ({ addTask }) => {
 
   return (
     <div>
-        <p>タスクの新規追加</p>
+        <h2>タスクの新規追加</h2>
         <div className="textBox">
-            <input type="text" placeholder="title" value={title} onChange={(e) => setTitle(e.target.value)} /><br />
-            <input type="text" placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)} /><br />
+            <input type="text" placeholder="タスクタイトル" value={title} onChange={(e) => setTitle(e.target.value)} /><br />
+            <input type="text" placeholder="タスクの説明" value={description} onChange={(e) => setDescription(e.target.value)} /><br />
             <button onClick={handleClick}>追加</button>
         </div>
     </div>

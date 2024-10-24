@@ -19,7 +19,7 @@ const TaskList = () => {
 
   return (
     <div>
-      <p>タスク一覧表</p>
+      <h2>タスク一覧表</h2>
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>

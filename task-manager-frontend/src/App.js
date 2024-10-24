@@ -23,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={
           <div>
+            <h1>タスク管理ページ</h1>
             <TaskList />
             <TaskForm addTask={addTask} />
           </div>

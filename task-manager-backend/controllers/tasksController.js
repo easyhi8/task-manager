@@ -1,4 +1,4 @@
-const db = require("../config/datebase");
+const db = require("../config/database");
 
 // 全タスクを取得する
 const getTasks = (req, res) => {
@@ -54,7 +54,7 @@ const deleteTask = (req, res) => {
       } else if (result.affectedRows === 0) {
           res.status(404).send("Task not found");
       } else {
-          res.send({ "Task deleted successfully" });
+          res.send({ message: "Task deleted successfully" });
       }
   });
 };
