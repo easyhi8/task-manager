@@ -21,8 +21,8 @@ function App() {
 
   return (
     <div className="App">
+    <Route path="/tasks" component={TaskList} />
     <TaskForm addTask={addTask} />
-    <TaskList />
 </div>
     );
 }
