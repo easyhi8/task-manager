@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-// Appコンポーネントをルート要素にレンダリング
-ReactDOM.render(
-    <App />, // Appコンポーネントを描画
-  document.getElementById('root') // HTMLファイル内のid="root"の要素に描画
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
 );
