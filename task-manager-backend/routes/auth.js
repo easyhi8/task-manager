@@ -8,6 +8,6 @@ router.post("/auth", authController.insertUser);
 
 router.put("/auth", authController.updateUser);
 
-router.delete("/auth", authController.deleteUser);
+// router.delete("/auth", authController.deleteUser);
 
 module.exports = authRouter;
