@@ -1,15 +1,15 @@
 import React from "react";
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import TaskForm from "./components/TaskForm";
-import apiService from "./services/apiService";
+import taskService from "./services/apiService";
 import ReactDOM from 'react-dom';
 import TaskList from "./components/TaskList";
 
 function App() {
 
     const addTask = (title, description, status) => {
-        apiService.addTask(title, description, status)
+        taskService.addTask(title, description, status)
             .then(() => {
                 alert("Task added successfully");
             })
@@ -21,16 +21,24 @@ function App() {
 
   return (
     <div className="App">
-    <Route path="/tasks" component={TaskList} />
-    <TaskForm addTask={addTask} />
-</div>
+      <Routes>
+        <Route path="/" element={
+          <div>
+            <TaskList />
+            <TaskForm addTask={addTask} />
+          </div>
+        } />
+      </Routes>
+    </div>
     );
 }
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <div>
+      <p>タスク管理ページ</p>
+      <App />
+    </div>
   </BrowserRouter>,
   document.getElementById('root')
 );
-// export default App;

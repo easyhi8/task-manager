@@ -15,7 +15,7 @@ const getTasks = (req, res) => {
 
 // 新しいタスクを追加する
 const insertTask = (req, res) => {
-    const { name, email } = req.body;
+    const { title, description } = req.body;
     const sqlInsert = "INSERT INTO task (title, description) VALUES (?, ?)";
     db.query(sqlInsert, [title, description], (err, result) => {
         if (err) {
