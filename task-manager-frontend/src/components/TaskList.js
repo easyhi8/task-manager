@@ -1,3 +1,4 @@
+//Task.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -7,7 +8,7 @@ const TaskList = () => {
   useEffect(() => {
     const getTasks = async () => {
       try {
-        const response = await axios.get('/tasks');
+        const response = await axios.get('http://localhost:3001/api/tasks');
         setTasks(response.data);
       } catch (err) {
         console.error("タスク取得時のエラー:");

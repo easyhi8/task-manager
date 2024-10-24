@@ -19,7 +19,7 @@ const TaskForm = ({ addTask }) => {
         <h2>タスクの新規追加</h2>
         <div className="textBox">
             <input type="text" placeholder="タスクタイトル" value={title} onChange={(e) => setTitle(e.target.value)} /><br />
-            <input type="text" placeholder="タスクの説明" value={description} onChange={(e) => setDescription(e.target.value)} /><br />
+            <textarea placeholder="タスクの説明" value={description} onChange={(e) => setDescription(e.target.value)} rows="2" /><br />
             <button onClick={handleClick}>追加</button>
         </div>
     </div>
