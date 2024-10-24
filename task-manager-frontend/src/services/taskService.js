@@ -5,15 +5,15 @@ const getTasks = () => {
 };
 
 const addTask = (title, description) => {
-    return Axios.post("http://localhost:3001/api/insert/task", { title, description });
+    return Axios.post("http://localhost:3001/api/tasks", { title, description });
 };
 
-const updateTask = () => {
-  return Axios.update("http://localhost:3001/api/get/update");
+const updateTask = (id,title, description) => {
+  return Axios.put("http://localhost:3001/api/tasks", { title, description });
 };
 
-const deleteTask = () => {
-  return Axios.delete("http://localhost:3001/api/get/delete");
+const deleteTask = (id) => {
+  return Axios.delete("http://localhost:3001/api/tasks");
 };
 
 const taskService = {

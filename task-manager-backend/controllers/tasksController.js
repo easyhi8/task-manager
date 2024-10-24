@@ -16,13 +16,13 @@ const getTasks = (req, res) => {
 // 新しいタスクを追加する
 const insertTask = (req, res) => {
     const { title, description } = req.body;
-    const sqlInsert = "INSERT INTO task (title, description) VALUES (?, ?)";
+    const sqlInsert = "INSERT INTO tasks (title, description) VALUES (?, ?)";
     db.query(sqlInsert, [title, description], (err, result) => {
         if (err) {
             console.error(err);
             res.status(500).send("Failed to insert new task");
         } else {
-            res.status(200).send("Task added successfully");
+            res.status(201).send("Task added successfully");
         }
     });
 };
@@ -54,7 +54,7 @@ const deleteTask = (req, res) => {
       } else if (result.affectedRows === 0) {
           res.status(404).send("Task not found");
       } else {
-          res.send({ message: "Task deleted successfully" });
+          res.send({ "Task deleted successfully" });
       }
   });
 };

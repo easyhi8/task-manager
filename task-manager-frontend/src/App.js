@@ -1,15 +1,14 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import TaskForm from "./components/TaskForm";
-import taskService from "./services/apiService";
-import ReactDOM from 'react-dom';
+import taskService from "./services/taskService";
 import TaskList from "./components/TaskList";
 
 function App() {
 
-    const addTask = (title, description, status) => {
-        taskService.addTask(title, description, status)
+    const addTask = (title, description) => {
+        taskService.addTask(title, description)
             .then(() => {
                 alert("Task added successfully");
             })
@@ -33,12 +32,4 @@ function App() {
     );
 }
 
-ReactDOM.render(
-  <BrowserRouter>
-    <div>
-      <p>タスク管理ページ</p>
-      <App />
-    </div>
-  </BrowserRouter>,
-  document.getElementById('root')
-);
+export default App;
