@@ -2,23 +2,12 @@ const db = require("../config/database");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// 全ユーザーを取得する
-const getUsers = (req, res) => {
-    const sqlSelect = "SELECT * FROM users ORDER BY id";
-    db.query(sqlSelect, (err, result) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send("Error retrieving users from the database");
-        }
-        res.send(result);
-    });
-};
 
 // 新しいユーザーを追加する
 const insertUser = async (req, res) => {
     const { userName, password } = req.body;
     if (!userName || !password) {
-        return res.status(400).send("ユーザー名とパスワードを入力してください。");
+        return res.status(400).send("Enter your username and password。");
     }
 
     try {
@@ -37,4 +26,33 @@ const insertUser = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, insertUser };
+// ログイン処理
+const loginUser = async (req, res) => {
+    const { userName, password } = req.body;
+    if (!userName || !password) {
+        return res.status(400).send("Enter your username and password。");
+    }
+
+    const sqlSelect = "SELECT * FROM users WHERE userName = ?";
+    db.query(sqlSelect, [userName], async (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send("Failed to login");
+        }
+
+        const user = results[0];
+        const match = await bcrypt.compare(password, user.password);
+
+        if (results.length === 0) {
+          return res.status(401).send("Incorrect username or password");
+        }
+      
+        if (!match) {
+          return res.status(401).send("Incorrect username or password");
+        }
+        const token = jwt.sign({ id: user.id }, "your_jwt_secret", { expiresIn: "1h" });
+        res.json({ message: "User login successfully", token });
+      });
+};
+
+module.exports = { insertUser, loginUser };
