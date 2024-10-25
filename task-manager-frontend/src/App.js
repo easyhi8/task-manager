@@ -3,7 +3,7 @@ import React from "react";
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import AuthForm from "./components/AuthForm"
-import TaskPage from "./components/TaskForm";
+import TaskPage from "./pages/TaskPage";
 
 function App() {
 

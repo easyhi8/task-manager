@@ -1,8 +1,8 @@
 //TaskPage.js
 import React from "react";
-import TaskForm from "./components/TaskForm";
-import TaskList from "./components/TaskList";
-import taskService from "./services/taskService";
+import TaskForm from "../components/TaskForm";
+import TaskList from "../components/TaskList";
+import taskService from "../services/taskService";
 
 function TaskPage() {
   const addTask = (title, description) => {
