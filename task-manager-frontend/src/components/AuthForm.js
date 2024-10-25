@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
                 return;
             }
           try {
-            const response = await axios.post("/register", { useruserName: userName, password });
+            const response = await axios.post("http://localhost:3001/api/register", { userName, password });
             alert("登録成功！");
             const token = response.data.token;
             localStorage.setItem("token", token);
@@ -32,7 +32,7 @@ import { useNavigate } from "react-router-dom";
                 return;
             }
           try {
-            const response = await axios.post("/login", { useruserName: userName, password });
+            const response = await axios.post("http://localhost:3001/api/login", { userName, password });
             alert("ログインに成功しました。");
             const token = response.data.token;
             localStorage.setItem("token", token);

@@ -1,3 +1,4 @@
+//App.js
 import React from "react";
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -10,7 +11,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<AuthForm/>} />
-        <Route path="/TaskPage" element={<TaskPage/>} />
+        <Route path="/tasks" element={<TaskPage/>} />
       </Routes>
     </div>
     );
