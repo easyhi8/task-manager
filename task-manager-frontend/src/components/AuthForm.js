@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
   const AuthForm = () => {
       const [userName, setUserName] = useState("");
       const [password, setPassword] = useState("");
-      const history = useHistory();
+      const navigate = useNavigate();
       
       const registerClick = async () => {
           if (!userName || !password) {
@@ -17,7 +17,7 @@ import { useHistory } from "react-router-dom";
             alert("登録成功！");
             const token = response.data.token;
             localStorage.setItem("token", token);
-            history.push("/tasks");
+            navigate.push("/tasks");
         } catch (error) {
             alert("登録に失敗しました。");
             console.error(error);
@@ -36,7 +36,7 @@ import { useHistory } from "react-router-dom";
             alert("ログインに成功しました。");
             const token = response.data.token;
             localStorage.setItem("token", token);
-            history.push("/tasks");
+            navigate.push("/tasks");
         } catch (error) {
             alert("ログインに失敗しました。");
             console.error(error);
@@ -47,7 +47,7 @@ import { useHistory } from "react-router-dom";
       };
 
     return (
-      <div class="login">
+      <div className="login">
           <h2>ログイン</h2>
           <div className="textBox">
               <input type="text" placeholder="ユーザー名" value={userName} onChange={(e) => setUserName(e.target.value)} /><br />
