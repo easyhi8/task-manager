@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TaskList from "./TaskList";
 
 const TaskForm = ({ addTask }) => {
     const [title, setTitle] = useState("");
@@ -21,6 +22,7 @@ const TaskForm = ({ addTask }) => {
 
   return (
     <div>
+        <TaskList/>
         <h2>タスクの新規追加</h2>
         <div className="textBox">
             <input type="text" placeholder="タスクタイトル" value={title} onChange={(e) => setTitle(e.target.value)} /><br />
