@@ -33,7 +33,7 @@ import { useHistory } from "react-router-dom";
             }
           try {
             const response = await axios.post("/login", { useruserName: userName, password });
-            alert("ログイン成功！");
+            alert("ログインに成功しました。");
             const token = response.data.token;
             localStorage.setItem("token", token);
             history.push("/tasks");

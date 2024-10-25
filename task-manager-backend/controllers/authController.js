@@ -40,13 +40,13 @@ const loginUser = async (req, res) => {
             return res.status(500).send("Failed to login");
         }
 
-        const user = results[0];
-        const match = await bcrypt.compare(password, user.password);
-
         if (results.length === 0) {
           return res.status(401).send("Incorrect username or password");
         }
-      
+
+        const user = results[0];
+        const match = await bcrypt.compare(password, user.password);
+
         if (!match) {
           return res.status(401).send("Incorrect username or password");
         }
