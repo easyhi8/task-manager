@@ -1,12 +1,10 @@
 //TaskPage.js
 import React from "react";
-
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 import taskService from "./services/taskService";
 
 function TaskPage() {
-
   const addTask = (title, description) => {
       taskService.addTask(title, description)
           .then(() => {
@@ -20,11 +18,9 @@ function TaskPage() {
 
 return (
   <div className="taskPage">
-        <div>
           <h1>タスク管理ページ</h1>
           <TaskList />
           <TaskForm addTask={addTask} />
-        </div>
   </div>
   );
 }

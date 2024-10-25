@@ -7,16 +7,18 @@ const TaskList = () => {
 
   useEffect(() => {
     const getTasks = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/api/tasks');
-        setTasks(response.data);
-      } catch (err) {
-        console.error("タスク取得時のエラー:");
-      }
+        try {
+            const response = await axios.get('http://localhost:3001/api/tasks');
+            console.log("APIからのレスポンス:", response.data);
+            setTasks(response.data);
+        } catch (err) {
+            console.error("タスク取得時のエラー:", err);
+        }
     };
 
     getTasks();
-  }, []);
+}, []);
+
 
   return (
     <div>
