@@ -18,7 +18,7 @@ function TaskManagement() {
   };
 
 return (
-  <div className="TaskManagement">
+  <div className="taskManagement">
         <div>
           <h1>タスク管理ページ</h1>
           <TaskList />

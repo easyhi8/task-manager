@@ -47,7 +47,7 @@ import { useHistory } from "react-router-dom";
       };
 
     return (
-      <div>
+      <div class="login">
           <h2>ログイン</h2>
           <div className="textBox">
               <input type="text" placeholder="ユーザー名" value={userName} onChange={(e) => setUserName(e.target.value)} /><br />
