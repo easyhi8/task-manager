@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
             alert("登録成功！");
             const token = response.data.token;
             localStorage.setItem("token", token);
-            navigate.push("/tasks");
+            navigate("/tasks");
         } catch (error) {
             alert("登録に失敗しました。");
             console.error(error);
@@ -36,7 +36,7 @@ import { useNavigate } from "react-router-dom";
             alert("ログインに成功しました。");
             const token = response.data.token;
             localStorage.setItem("token", token);
-            navigate.push("/tasks");
+            navigate("/tasks");
         } catch (error) {
             alert("ログインに失敗しました。");
             console.error(error);

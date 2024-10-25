@@ -1,10 +1,11 @@
+//TaskPage.js
 import React from "react";
 
 import TaskForm from "./components/TaskForm";
-import taskService from "./services/taskService";
 import TaskList from "./components/TaskList";
+import taskService from "./services/taskService";
 
-function TaskManagement() {
+function TaskPage() {
 
   const addTask = (title, description) => {
       taskService.addTask(title, description)
@@ -18,7 +19,7 @@ function TaskManagement() {
   };
 
 return (
-  <div className="taskManagement">
+  <div className="taskPage">
         <div>
           <h1>タスク管理ページ</h1>
           <TaskList />
@@ -28,4 +29,4 @@ return (
   );
 }
 
-export default TaskManagement;
+export default TaskPage;
