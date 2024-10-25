@@ -13,9 +13,6 @@
 }
 
 /* フォームのスタイル */
-/* .textBox {
-  margin-bottom: 20px;
-} */
 
 .textBox input,
 .textBox textarea {
@@ -29,7 +26,7 @@
 }
 
 .textBox textarea {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .textBox button {
@@ -41,7 +38,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-right: 10px;
+  margin: 15px 20px 0 0;
 }
 
 .textBox button:hover {
