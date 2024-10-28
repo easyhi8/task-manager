@@ -41,7 +41,6 @@ const TaskForm = ({ addTask }) => {
       localStorage.removeItem("token");
       navigate("/");
     };
-    
 
   return (
     <div>
@@ -51,7 +50,7 @@ const TaskForm = ({ addTask }) => {
             <textarea placeholder="タスクの説明" value={description} onChange={(e) => setDescription(e.target.value)} rows="2" /><br />
             <input type="date" id="dateInput" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
             <select value={status} onChange={(e) => setStatus(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
-            <div  className="buttonContainer">
+            <div className="buttonContainer" >
               <button onClick={handleClick}>追加</button>
               <button onClick={handleLogout}>ログアウト</button>
             </div>

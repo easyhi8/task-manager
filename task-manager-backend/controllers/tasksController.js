@@ -65,7 +65,7 @@ const updateTask = (req, res) => {
 
 // タスクを削除する
 const deleteTask = (req, res) => {
-  const { id } = req.body;
+  const id = req.params.id;
   const sqlDelete = "DELETE FROM tasks WHERE id = ?";
   db.query(sqlDelete, [id], (err, result) => {
       if (err) {

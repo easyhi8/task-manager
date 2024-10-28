@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import taskService from '../services/taskService';
 
 const TaskDetail = () => {
   const { id } = useParams();
@@ -30,6 +31,16 @@ const TaskDetail = () => {
   };
   
   const handleDelete = () => {
+    taskService.deleteTask(task.id)
+        .then(response => {
+            console.log(response.data);
+            alert("タスクが正常に削除されました")
+            navigate(`/tasks`);
+        })
+        .catch(error => {
+            console.error("Error deleting task:", error);
+            alert("タスクの削除中にエラーが発生しました");
+        });
     navigate(`/tasks`);
 };
 
