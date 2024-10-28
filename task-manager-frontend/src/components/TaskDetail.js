@@ -27,6 +27,10 @@ const TaskDetail = () => {
 };
   const handleBack = () => {
     navigate(`/tasks`);
+  };
+  
+  const handleDelete = () => {
+    navigate(`/tasks`);
 };
 
   return (
@@ -35,9 +39,10 @@ const TaskDetail = () => {
         <div className="textBox">
             <h3>{task.title}</h3>
             <p>{task.description}</p>
-            <div>
+            <div className="buttonContainer">
               <button onClick={handleEdit}>編集</button>
               <button onClick={handleBack}>戻る</button>
+              <button style={{marginLeft: "auto"}} onClick={handleDelete}>削除</button>
             </div>
         </div>
     </div>

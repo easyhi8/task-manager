@@ -51,9 +51,9 @@ const TaskForm = ({ addTask }) => {
             <textarea placeholder="タスクの説明" value={description} onChange={(e) => setDescription(e.target.value)} rows="2" /><br />
             <input type="date" id="dateInput" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
             <select value={status} onChange={(e) => setStatus(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
+            <div  className="buttonContainer">
               <button onClick={handleClick}>追加</button>
-              <button style={{marginRight: "0"}} onClick={handleLogout}>ログアウト</button>
+              <button onClick={handleLogout}>ログアウト</button>
             </div>
         </div>
     </div>

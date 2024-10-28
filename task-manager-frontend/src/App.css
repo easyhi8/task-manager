@@ -63,6 +63,8 @@ select {
 }
 
 .textBox button {
+  margin-right: 10px;
+  margin-top: 10px;
   padding: 10px;
   border: none;
   border-radius: 4px;
@@ -71,7 +73,17 @@ select {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin: 30px 20px 0 0;
+}
+
+.buttonContainer {
+  display: flex;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.textBox button:last-child {
+  margin-left: auto;
+  align-self: center;
 }
 
 .textBox button:hover {
