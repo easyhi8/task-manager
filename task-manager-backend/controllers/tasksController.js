@@ -2,16 +2,18 @@ const db = require("../config/database");
 
 // 全タスクを取得する
 const getTasks = (req, res) => {
-    const sqlSelect = "SELECT * FROM tasks ORDER BY id";
-    db.query(sqlSelect, (err, result) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send("Error retrieving tasks from the database");
-        } else {
-            res.send(result);
-        }
-    });
+  const sqlSelect = "SELECT * FROM tasks ORDER BY id";
+  db.query(sqlSelect, (err, result) => {
+      if (err) {
+          console.error("データベースエラー:", err);
+          res.status(500).send("Error retrieving tasks from the database");
+      } else {
+          console.log("取得したタスク:", result);
+          res.send(result);
+      }
+  });
 };
+
 
 // 新しいタスクを追加する
 const insertTask = (req, res) => {

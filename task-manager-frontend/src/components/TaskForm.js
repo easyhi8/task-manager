@@ -13,6 +13,11 @@ const TaskForm = ({ addTask }) => {
         setTitle("");
         setDescription("");
     };
+    
+    const handleLogout = () => {
+      localStorage.removeItem("token");
+      window.location.href = "/";
+  };
 
   return (
     <div>
@@ -20,7 +25,10 @@ const TaskForm = ({ addTask }) => {
         <div className="textBox">
             <input type="text" placeholder="タスクタイトル" value={title} onChange={(e) => setTitle(e.target.value)} /><br />
             <textarea placeholder="タスクの説明" value={description} onChange={(e) => setDescription(e.target.value)} rows="2" /><br />
-            <button onClick={handleClick}>追加</button>
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
+              <button onClick={handleClick}>追加</button>
+              <button style={{marginRight: "0"}} onClick={handleLogout}>ログアウト</button>
+            </div>
         </div>
     </div>
     );
