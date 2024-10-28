@@ -31,17 +31,20 @@ const TaskDetail = () => {
   };
   
   const handleDelete = () => {
-    taskService.deleteTask(task.id)
-        .then(response => {
-            console.log(response.data);
-            alert("タスクが正常に削除されました")
-            navigate(`/tasks`);
-        })
-        .catch(error => {
-            console.error("Error deleting task:", error);
-            alert("タスクの削除中にエラーが発生しました");
-        });
-    navigate(`/tasks`);
+    if (window.confirm("このタスクを削除してもよろしいですか？")) {
+      taskService.deleteTask(task.id)
+          .then(response => {
+              console.log(response.data);
+              alert("タスクが正常に削除されました")
+              navigate(`/tasks`);
+          })
+          .catch(error => {
+              console.error("Error deleting task:", error);
+              alert("タスクの削除中にエラーが発生しました");
+          });
+    } else {
+      console.log("タスクの削除がキャンセルされました");
+  }
 };
 
   return (
