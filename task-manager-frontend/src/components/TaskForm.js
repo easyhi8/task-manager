@@ -12,7 +12,7 @@ const TaskForm = ({ addTask }) => {
   }, []);
     
     const handleClick = (e) => {
-        if (!title || !description || !deadline) {
+        if (!title || !description || !deadline || !status) {
               alert("タイトルと説明を入力してください。");
               return;
           }
@@ -35,7 +35,7 @@ const TaskForm = ({ addTask }) => {
             <input type="text" placeholder="タスクタイトル" value={title} onChange={(e) => setTitle(e.target.value)} /><br />
             <textarea placeholder="タスクの説明" value={description} onChange={(e) => setDescription(e.target.value)} rows="2" /><br />
             <input type="date" id="dateInput" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
+            <select value={status} onChange={(e) => setStatus(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
               <button onClick={handleClick}>追加</button>
               <button style={{marginRight: "0"}} onClick={handleLogout}>ログアウト</button>
