@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import taskService from '../services/taskService';
 
 const TaskForm = ({ addTask }) => {
+    const statusOptions = ["未完了", "完了"];
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [deadline, setDeadline] = useState("");
-    const [status, setStatus] = useState("");
+    const [status, setStatus] = useState(statusOptions[0]);
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -15,12 +17,24 @@ const TaskForm = ({ addTask }) => {
     
     const handleClick = (e) => {
         if (!title || !description || !deadline || !status) {
-              alert("タイトルと説明を入力してください。");
+              alert("すべてのフィールドを入力してください");
               return;
           }
-        addTask(title, description, deadline, status);
+        console.log("Sending data:", { title, description, deadline, status });
+        taskService.addTask(title, description, deadline, status)
+        .then(response => {
+            console.log(response.data);
+            alert("タスクが正常に追加されました")
+            window.location.reload()
+        })
+        .catch(error => {
+            console.error("Error adding task:", error);
+            alert("タスクの追加中にエラーが発生しました");
+        });
         setTitle("");
         setDescription("");
+        setDeadline(new Date().toISOString().split('T')[0]);
+        setStatus(statusOptions[0]);
     };
     
     const handleLogout = () => {
@@ -28,7 +42,6 @@ const TaskForm = ({ addTask }) => {
       navigate("/");
     };
     
-    const statusOptions = ["未完了", "完了"];
 
   return (
     <div>

@@ -7,7 +7,7 @@ router.get("/tasks", tasksController.getTasks);
 
 router.get("/tasks/:id", tasksController.getTask);
 
-router.post("/tasks", tasksController.insertTask);
+router.post("/tasks", tasksController.addTask);
 
 router.put("/tasks/:id", tasksController.updateTask);
 

@@ -22,7 +22,7 @@ const getTask= (req, res) => {
   db.query(sqlSelect, [id], (err, result) => {
       if (err) {
           console.error("データベースエラー:", err);
-          res.status(500).send("Error retrieving task from the database");
+          res.status(500).send("データベースからタスクを取得中にエラーが発生しました");
       }
       if (result.length === 0) {
           return res.status(404).send("タスクが見つかりません");
@@ -33,15 +33,15 @@ const getTask= (req, res) => {
 };
 
 // 新しいタスクを追加する
-const insertTask = (req, res) => {
-    const { title, description } = req.body;
-    const sqlInsert = "INSERT INTO tasks (title, description) VALUES (?, ?)";
-    db.query(sqlInsert, [title, description], (err, result) => {
+const addTask = (req, res) => {
+    const { title, description, deadline, status } = req.body;
+    const sqlInsert = "INSERT INTO tasks (title, description, deadline, status) VALUES (?, ?, ?, ?)";
+    db.query(sqlInsert, [title, description, deadline, status], (err, result) => {
         if (err) {
             console.error(err);
-            res.status(500).send("Failed to insert new task");
+            res.status(500).send("新しいタスクを追加できませんでした");
         } else {
-            res.status(201).send("Task added successfully");
+            res.status(201).send("タスクが正常に追加されました");
         }
     });
 };
@@ -54,9 +54,9 @@ const updateTask = (req, res) => {
   db.query(sqlUpdate, [title, description, deadline, status, id], (err, result) => {
       if (err) {
           console.error(err);
-          res.status(500).send("Failed to update task");
+          res.status(500).send("タスクの更新に失敗しました");
       } else if (result.affectedRows === 0) {
-          res.status(404).send("Task not found");
+          res.status(404).send("タスクが見つかりません");
       } else {
           res.send({ id, title, description, deadline, status});
       }
@@ -70,13 +70,13 @@ const deleteTask = (req, res) => {
   db.query(sqlDelete, [id], (err, result) => {
       if (err) {
           console.error(err);
-          res.status(500).send("Failed to delete task");
+          res.status(500).send("タスクの削除に失敗しました");
       } else if (result.affectedRows === 0) {
-          res.status(404).send("Task not found");
+          res.status(404).send("タスクが見つかりません");
       } else {
-          res.send({ message: "Task deleted successfully" });
+          res.send({ message: "タスクが正常に削除されました" });
       }
   });
 };
 
-module.exports = { getTasks, getTask, insertTask, updateTask, deleteTask };
+module.exports = { getTasks, getTask, addTask, updateTask, deleteTask };
