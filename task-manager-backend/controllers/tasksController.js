@@ -1,3 +1,4 @@
+//tasksController.js
 const db = require("../config/database");
 
 // 全タスクを取得する
@@ -14,6 +15,22 @@ const getTasks = (req, res) => {
   });
 };
 
+//単一のタスクを取得する
+const getTask= (req, res) => {
+  const id = req.params.id;
+  const sqlSelect = "SELECT * FROM tasks WHERE id = ?"
+  db.query(sqlSelect, [id], (err, result) => {
+      if (err) {
+          console.error("データベースエラー:", err);
+          res.status(500).send("Error retrieving task from the database");
+      }
+      if (result.length === 0) {
+          return res.status(404).send("タスクが見つかりません");
+      }
+      console.log("取得したタスク:", result[0]);
+      res.json(result[0]);
+  });
+};
 
 // 新しいタスクを追加する
 const insertTask = (req, res) => {
@@ -61,4 +78,4 @@ const deleteTask = (req, res) => {
   });
 };
 
-module.exports = { getTasks, insertTask, updateTask, deleteTask };
+module.exports = { getTasks, getTask, insertTask, updateTask, deleteTask };
