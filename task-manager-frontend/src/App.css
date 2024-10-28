@@ -47,7 +47,8 @@ body {
   font-family: inherit;
 }
 
-.textBox textarea {
+#dateInput {
+  width: 20%;
   margin-bottom: 15px;
 }
 
@@ -60,7 +61,7 @@ body {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin: 15px 20px 0 0;
+  margin: 30px 20px 0 0;
 }
 
 .textBox button:hover {
