@@ -48,16 +48,17 @@ const insertTask = (req, res) => {
 
 // タスクを更新する
 const updateTask = (req, res) => {
-  const { id, title, description } = req.body;
-  const sqlUpdate = "UPDATE tasks SET title = ?, description = ? WHERE id = ?";
-  db.query(sqlUpdate, [id, title, description], (err, result) => {
+  const id = req.params.id;
+  const { title, description, deadline, status } = req.body;
+  const sqlUpdate = "UPDATE tasks SET title = ?, description = ?, deadline = ?, status = ? WHERE id = ?";
+  db.query(sqlUpdate, [title, description, deadline, status, id], (err, result) => {
       if (err) {
           console.error(err);
           res.status(500).send("Failed to update task");
       } else if (result.affectedRows === 0) {
           res.status(404).send("Task not found");
       } else {
-          res.send({ id, title, description });
+          res.send({ id, title, description, deadline, status});
       }
   });
 };

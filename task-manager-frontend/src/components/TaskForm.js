@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const TaskForm = ({ addTask }) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [deadline, setDeadline] = useState("");
     const [status, setStatus] = useState("");
+    const navigate = useNavigate();
     
     useEffect(() => {
       const today = new Date().toISOString().split('T')[0];
@@ -16,14 +18,14 @@ const TaskForm = ({ addTask }) => {
               alert("タイトルと説明を入力してください。");
               return;
           }
-        addTask(title, description);
+        addTask(title, description, deadline, status);
         setTitle("");
         setDescription("");
     };
     
     const handleLogout = () => {
       localStorage.removeItem("token");
-      window.location.href = "/";
+      navigate("/");
     };
     
     const statusOptions = ["未完了", "完了"];

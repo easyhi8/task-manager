@@ -9,7 +9,7 @@ router.get("/tasks/:id", tasksController.getTask);
 
 router.post("/tasks", tasksController.insertTask);
 
-router.put("/tasks", tasksController.updateTask);
+router.put("/tasks/:id", tasksController.updateTask);
 
 router.delete("/tasks", tasksController.deleteTask);
 
