@@ -100,6 +100,7 @@ select {
 .textBox button:last-child {
   margin-left: auto;
   align-self: center;
+  margin-right: 0;
 }
 
 .textBox button:hover {
