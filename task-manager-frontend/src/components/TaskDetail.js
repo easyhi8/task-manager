@@ -31,6 +31,7 @@ const TaskDetail = () => {
   };
   
   const handleDelete = () => {
+     // 確認ダイアログを表示
     if (window.confirm("このタスクを削除してもよろしいですか？")) {
       taskService.deleteTask(task.id)
           .then(response => {
