@@ -31,6 +31,10 @@ body {
     --text-color: #ffffff;
     --box-shadow-color: rgba(255, 255, 255, 0.3);
   }
+
+  a:visited {
+    color: #be76f5;
+  }
 }
 
 
