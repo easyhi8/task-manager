@@ -71,7 +71,7 @@ const TaskEdit = ({ updateTask }) => {
                 <select value={status} onChange={(e) => setStatus(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
               </div>
             </div>
-            <div>
+            <div className="buttonContainer">
               <button onClick={handleSave}>保存</button>
               <button onClick={handleCancel}>キャンセル</button>
             </div>

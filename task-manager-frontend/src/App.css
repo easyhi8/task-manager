@@ -37,9 +37,7 @@ body {
   }
 }
 
-
 /* フォームのスタイル */
-
 .textBox input,
 .textBox textarea {
   width: 45%;
@@ -55,6 +53,7 @@ body {
   display: flex;
   justify-content: space-between;
   width: 48%;
+  flex-wrap: wrap;
 }
 
 .inputGroup {
@@ -65,10 +64,10 @@ body {
 
 .inputGroup label {
   display: block;
-  width: 100%
+  width: 100%;
 }
 
-#dateInput, 
+#dateInput,
 select {
   width: 100%;
   padding: 10px;
@@ -78,6 +77,8 @@ select {
   font-family: inherit;
   margin: 0;
 }
+
+
 
 .textBox button {
   margin-right: 10px;
@@ -121,12 +122,39 @@ li {
   border-radius: 4px;
 }
 
-
-
 /* メディアクエリを追加してレスポンシブ対応 */
 @media (max-width: 600px) {
-  .textBox input, .textBox button {
+  .inputRow {
+    width: 93%;
+    flex-direction: column;
+  }
+
+  .inputGroup {
     width: 100%;
-    margin: 5px 0;
+    margin-bottom: 10px;
+  }
+
+  .inputGroup select {
+    width: 107%;
+  }
+
+  .textBox input, 
+  .textBox button {
+    width: 45%;
+    margin: 5px 10px 5px 0;
+  }
+
+  .textBox input,
+  .textBox textarea {
+    width: 93%;
+  }
+
+  #dateInput,
+  select {
+    text-align: center; 
+  }
+
+  .textBox button:last-child {
+    margin-right: 0;
   }
 }
