@@ -1,47 +1,53 @@
-﻿# プロジェクト名: ユーザー管理システム
+﻿# プロジェクト名: タスク管理システム
 
 ## 概要
 
-このプロジェクトは、ユーザー情報の追加と一覧表示ができる簡単な**ユーザー管理システム**です。フロントエンドはReact、バックエンドはNode.jsとExpress、データベースはMySQLを使用しています。
+このプロジェクトは、ユーザー登録とログイン、タスク管理ができる簡単な**タスク管理システム**です。フロントエンドはReact、バックエンドはNode.jsとExpress、データベースはMySQLを使用しています。
 
 ### 主な機能
-1. **ユーザー追加機能**  
-   フォームに名前とメールアドレスを入力し、サーバー側にPOSTリクエストを送信して新しいユーザーをデータベースに追加します。
+1. **ユーザー登録機能**  
+   フォームに名前とパスワードを入力し、サーバー側にPOSTリクエストを送信して新しいユーザーをデータベースに追加します。登録後タスク管理ページへ遷移します。
    
-2. **ユーザー一覧表示機能**  
-   登録されたユーザーの名前とメールアドレスを一覧で表示します。ユーザーの追加後に自動的に一覧が更新されます。
+2. **ユーザーログイン機能**  
+   登録されたユーザーの名前とパスワードでログインが可能です。登録後タスク管理ページへ遷移します。
 
 ---
 
 ## ディレクトリ構造
 
-- **`client/`**  
+- **`task-manager-frontend/`**  
   フロントエンドのディレクトリ
 
   - **`public/`**
-    - `index.html` : Reactアプリケーションのエントリポイント
+    - `index.html` : ReactアプリケーションのエントリーポイントとなるHTMLファイル。index.js で作成されたReactコンポーネントが、このHTML内の div タグにマウントされます。
   - **`src/`**
     - **`components/`**
-      - `UserForm.js` : 新しいユーザーを追加するフォーム
-      - `UserList.js` : ユーザー一覧を表示するコンポーネント
-    - **`hooks/`**
-      - `useCategories.js` : カスタムフックで、ユーザーリストの管理と更新を行う
+      - `AuthForm.js` : ユーザーのログインや新規登録を行うためのフォームコンポーネント。axiosInstance.js を使用して認証関連のAPI（/login や /register）と連携します。
+      - `TaskForm.js` : 新しいタスクを作成するためのフォームコンポーネント。ユーザーが入力したタスクデータをバックエンドに送信し、タスクを追加します。また、タスクの編集にも使用されます。
+      - `TaskEdit.js` : タスクの編集ページ
+      - `TaskDetail.js` : 個々のタスクの詳細を表示するコンポーネント。特定のタスクの情報を表示し、編集や削除操作も可能です。
+      - `TaskList.js` : タスクの一覧を表示するコンポーネント。taskService.js を使ってAPIからタスクデータを取得し、リスト形式で表示します。
+    - **`pages/`**
+      - `TaskPage.js` : タスク管理ページ。タスクの一覧、タスクの追加・編集、タスクの詳細などを表示するために、TaskList.js や TaskForm.js などのコンポーネントを組み合わせて使用します。
     - **`services/`**
-      - `apiService.js` : APIリクエストを管理するファイル
-    - `App.js` : アプリ全体のコンポーネント
+      - `taskService.js` : タスク関連のAPI通信を行うサービス。GET /tasks、POST /tasks などのAPIリクエストを行い、TaskList.js や TaskForm.js から呼び出されます。
+    - `App.js` : Reactアプリのメインコンポーネント。ルーティングを定義し、各ページの表示を管理します。react-router-dom を使って異なるURLに対してページを切り替えます。
     - `App.css` : アプリのスタイル
-    - `index.js` : ルート要素に`App`コンポーネントを描画するためのファイル
+    - `index.js` : Reactアプリケーションのエントリーポイント。ReactDOM.render() を使って、App.js をHTML内の指定された場所に描画します。
   
-- **`server/`**  
+- **`task-manager-backend/`**  
   バックエンドのディレクトリ
 
   - **`routes/`**
-    - `userRoutes.js` : ユーザー関連のAPIルートを定義
+    - `auth.js` : 認証関連のAPIルートを定義するファイル。authController.js のメソッド（login や register）を呼び出し、ユーザーのログインや登録を処理します。
+    - `task.js` : タスク関連のAPIルートを定義するファイル。tasksController.js の各メソッド（例えば getAllTasks や createTask）を呼び出し、/tasks というエンドポイントでタスク操作を処理します。
   - **`controllers/`**
-    - `userController.js` : ユーザーのデータ操作に関するロジックをまとめたファイル
-  - **`db/`**
-    - `connection.js` : データベース接続を管理
+    - `authController.js` : ユーザーのデータ操作に関するロジックをまとめたファイル
+    - `taskController.js` : タスクに関するAPIのビジネスロジックを実装するコントローラ。GET /tasks でタスク一覧を取得したり、POST /tasks で新しいタスクを作成するなどの操作を行います。
+  - **`config/`**
+    - `database.js` : MySQLデータベースへの接続情報を設定するファイル。ホスト名、ユーザー名、パスワード、データベース名などが設定されます。
   - `app.js` : サーバーのメインファイル。APIルートの設定やサーバー起動を行う。
+  - `server.js` : Expressサーバーを起動するエントリーポイント。app.js をインポートし、サーバーを起動してリクエストを待ち受けます。
 
 ---
 
@@ -53,21 +59,28 @@
 1. MySQLにログインし、次のコマンドでデータベースとテーブルを作成します。
 
    ```sql
-   CREATE DATABASE express_db;
+   CREATE DATABASE task-manager;
    
-   USE express_db;
+   USE task-manager;
    
    CREATE TABLE users (
        id INT AUTO_INCREMENT PRIMARY KEY,
-       name VARCHAR(255) NOT NULL,
-       email VARCHAR(255) NOT NULL
+       name VARCHAR(45) NOT NULL,
+       password VARCHAR(255) NOT NULL
+   );
+   CREATE TABLE tasks (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       title VARCHAR(45) NOT NULL,
+       description VARCHAR(100) NOT NULL
+       deadline VARCHAR(20) NOT NULL
+       status VARCHAR(20) NOT NULL
    );
 
-### 2. **バックエンド（サーバー）セットアップ**
+### 2. **バックエンドセットアップ**
 
-`server/`ディレクトリに移動します。
+`task-manager-backend/`ディレクトリに移動します。
 
-cd server
+cd task-manager-backend
 必要な依存関係をインストールします。
 
 npm install
@@ -76,10 +89,10 @@ npm install
 npm start
 サーバーはポート3001で動作します。
 
-### 3. **フロントエンド（クライアント）セットアップ**
-別のターミナルを開き、client/ディレクトリに移動します。
+### 3. **フロントエンドセットアップ**
+別のターミナルを開き、`task-manager-frontend/`ディレクトリに移動します。
 
-cd client
+cd task-manager-frontend
 必要な依存関係をインストールします。
 
 npm install

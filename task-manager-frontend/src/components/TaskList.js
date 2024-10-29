@@ -7,7 +7,7 @@ const TaskList = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const getTasks = async () => {
+    const getAllTasks = async () => {
         try {
           const response = await axios.get('http://localhost:3001/api/tasks');
           console.log(response.data);
@@ -17,7 +17,7 @@ const TaskList = () => {
         }
     };
 
-    getTasks();
+    getAllTasks();
 }, []);
 
 

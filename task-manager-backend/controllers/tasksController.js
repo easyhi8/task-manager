@@ -2,7 +2,7 @@
 const db = require("../config/database");
 
 // 全タスクを取得する
-const getTasks = (req, res) => {
+const getAllTasks = (req, res) => {
   const sqlSelect = "SELECT * FROM tasks ORDER BY id";
   db.query(sqlSelect, (err, result) => {
       if (err) {
@@ -79,4 +79,4 @@ const deleteTask = (req, res) => {
   });
 };
 
-module.exports = { getTasks, getTask, addTask, updateTask, deleteTask };
+module.exports = { getAllTasks, getTask, addTask, updateTask, deleteTask };

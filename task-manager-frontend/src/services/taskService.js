@@ -1,7 +1,7 @@
 //taskService.js
 import Axios from 'axios';
 
-const getTasks = () => {
+const getAllTasks = () => {
     return Axios.get("http://localhost:3001/api/get/tasks");
 };
 
@@ -22,7 +22,7 @@ const deleteTask = (id) => {
 };
 
 const taskService = {
-    getTasks,
+    getAllTasks,
     getTask,
     addTask,
     updateTask,
