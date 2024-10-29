@@ -51,20 +51,34 @@ body {
   font-family: inherit;
 }
 
-#dateInput {
-  width: 20%;
-  margin-bottom: 15px;
+.inputRow {
+  display: flex;
+  justify-content: space-between;
+  width: 48%;
 }
 
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+.inputGroup label {
+  display: block;
+
+}
+
+#dateInput, 
 select {
-  width: 20%;
+  width: 100%;
   padding: 10px;
-  margin: 5px 0 15px 40px ;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
   font-family: inherit;
+  margin: 0;
 }
+
 
 .textBox button {
   margin-right: 10px;
@@ -108,37 +122,12 @@ li {
   border-radius: 4px;
 }
 
-.user-info {
-  display: flex;
-  justify-content: flex-start; /* 左寄せに変更 */
-  align-items: center;
-  padding: 2px 0;
-}
 
-.user-info span:first-child {
-  font-weight: bold;
-  margin-right: 10px; /* ラベルとテキストの間のスペースを減らす */
-}
-
-.user-info span:last-child {
-  flex-grow: 1;
-  text-align: right;
-  padding-left: 10px;
-}
 
 /* メディアクエリを追加してレスポンシブ対応 */
 @media (max-width: 600px) {
   .textBox input, .textBox button {
     width: 100%;
     margin: 5px 0;
-  }
-
-  .user-info {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .user-info span:last-child {
-    text-align: left;
   }
 }
