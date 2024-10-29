@@ -1,12 +1,13 @@
 //TaskList.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const getTasks = async () => {
+    const getAllTasks = async () => {
         try {
           const response = await axios.get('http://localhost:3001/api/tasks');
           console.log(response.data);
@@ -16,7 +17,7 @@ const TaskList = () => {
         }
     };
 
-    getTasks();
+    getAllTasks();
 }, []);
 
 
@@ -27,7 +28,7 @@ const TaskList = () => {
         {tasks.map((task) => (
           <li key={task.id}>
             <div className="task-title">
-              <span>{task.title}</span>
+            <Link to={`/tasks/${task.id}`}>{task.title}</Link>
             </div>
           </li>
         ))}
