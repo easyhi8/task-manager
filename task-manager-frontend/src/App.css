@@ -65,7 +65,7 @@ body {
 
 .inputGroup label {
   display: block;
-
+  width: 100%
 }
 
 #dateInput, 
@@ -78,7 +78,6 @@ select {
   font-family: inherit;
   margin: 0;
 }
-
 
 .textBox button {
   margin-right: 10px;

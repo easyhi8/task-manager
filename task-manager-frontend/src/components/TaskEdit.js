@@ -63,11 +63,11 @@ const TaskEdit = ({ updateTask }) => {
             <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows="2" /><br />
             <div className="inputRow">
               <div className="inputGroup">
-                <label htmlFor="dateInput">期限</label>
+                <label>期限</label>
                 <input type="date" id="dateInput" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
               </div>
               <div className="inputGroup">
-                <label htmlFor="status">ステータス</label>
+                <label>ステータス</label>
                 <select value={status} onChange={(e) => setStatus(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
               </div>
             </div>
