@@ -61,8 +61,16 @@ const TaskEdit = ({ updateTask }) => {
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} /><br />
             タスク内容<br/>
             <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows="2" /><br />
-            <input type="date" id="dateInput" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
-            <select value={status} onChange={(e) => setStatus(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
+            <div className="inputRow">
+              <div className="inputGroup">
+                <label htmlFor="dateInput">期限</label>
+                <input type="date" id="dateInput" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
+              </div>
+              <div className="inputGroup">
+                <label htmlFor="status">ステータス</label>
+                <select value={status} onChange={(e) => setStatus(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
+              </div>
+            </div>
             <div>
               <button onClick={handleSave}>保存</button>
               <button onClick={handleCancel}>キャンセル</button>
