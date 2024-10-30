@@ -1,4 +1,4 @@
-//TaskList.js
+// TaskList.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
 
-  //コンポーネントがマウントされたときにすべてのタスクを取得するためのuseEffectフック
+  // コンポーネントがマウントされたときにすべてのタスクを取得するためのuseEffectフック
   useEffect(() => {
     const getAllTasks = async () => {
       try {
-          //タスクを取得するAPIリクエスト
-          const response = await axios.get('http://localhost:3001/api/tasks');
+          // タスクを取得するAPIリクエスト
+          const response = await axios.get('http:// localhost:3001/api/tasks');
           console.log(response.data);
           setTasks(response.data);
         } catch (err) {
@@ -20,7 +20,7 @@ const TaskList = () => {
     };
 
     getAllTasks();
-  }, []); //空の依存配列で初回マウント時のみ実行
+  }, []); // 空の依存配列で初回マウント時のみ実行
 
 
   return (

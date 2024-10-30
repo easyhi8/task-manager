@@ -1,20 +1,20 @@
-//TaskForm.js
+// TaskForm.js
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import taskService from '../services/taskService';
 
 const TaskForm = ({ addTask }) => {
-    const statusOptions = ["未完了", "完了"]; //ステータス選択肢の配列
+    const statusOptions = ["未完了", "完了"]; // ステータス選択肢の配列
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [deadline, setDeadline] = useState("");
     const [status, setStatus] = useState(statusOptions[0]);
-    const navigate = useNavigate(); //ページ遷移に使用するためのuseNavigateフックを初期化
+    const navigate = useNavigate(); // ページ遷移に使用するためのuseNavigateフックを初期化
     
-    //コンポーネントがマウントされたときに期限を今日の日付に設定するためのuseEffectフック
+    // コンポーネントがマウントされたときに期限を今日の日付に設定するためのuseEffectフック
     useEffect(() => {
-      const today = new Date().toISOString().split('T')[0]; //今日の日付を取得
-      setDeadline(today); //期限に設定
+      const today = new Date().toISOString().split('T')[0]; // 今日の日付を取得
+      setDeadline(today); // 期限に設定
   }, []);
     
     const handleClick = (e) => {
@@ -23,27 +23,27 @@ const TaskForm = ({ addTask }) => {
               return;
           }
         console.log("Sending data:", { title, description, deadline, status });
-        taskService.addTask(title, description, deadline, status) //タスクを追加するためのAPI呼び出し
+        taskService.addTask(title, description, deadline, status) // タスクを追加するためのAPI呼び出し
         .then(response => {
             console.log(response.data);
             alert("タスクが正常に追加されました")
-            window.location.reload() //ページをリロードして新しいタスクを表示
+            window.location.reload() // ページをリロードして新しいタスクを表示
         })
         .catch(error => {
             console.error("Error adding task:", error);
             alert("タスクの追加中にエラーが発生しました");
         });
         
-        // フォームをリセット
+        //  フォームをリセット
         setTitle("");
         setDescription("");
-        setDeadline(new Date().toISOString().split('T')[0]); //期限を今日の日付にリセット
+        setDeadline(new Date().toISOString().split('T')[0]); // 期限を今日の日付にリセット
         setStatus(statusOptions[0]);
     };
     
     const handleLogout = () => {
-      localStorage.removeItem("token"); //ローカルストレージからトークンを削除
-      navigate("/"); //ログイン画面に遷移
+      localStorage.removeItem("token"); // ローカルストレージからトークンを削除
+      navigate("/"); // ログイン画面に遷移
     };
 
   return (

@@ -1,4 +1,4 @@
-//TaskPage.js
+// TaskPage.js
 import React from "react";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
@@ -6,7 +6,7 @@ import taskService from "../services/taskService";
 
 function TaskPage() {
   const addTask = (title, description) => {
-      taskService.addTask(title, description) //タスク追加のサービスメソッドを呼び出す
+      taskService.addTask(title, description) // タスク追加のサービスメソッドを呼び出す
           .then(() => {
               alert("Task added successfully");
           })
