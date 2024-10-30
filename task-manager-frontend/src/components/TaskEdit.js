@@ -29,7 +29,7 @@ const TaskEdit = ({ updateTask }) => {
       };
   
       getTask();
-  }, [id]); // idが変更されたときに再実行
+    }, [id]); // idが変更されたときに再実行
     
     const handleSave = async (e) => {
         if (!title || !description || !deadline || !status) {
