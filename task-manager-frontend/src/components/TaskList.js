@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
 
+  //コンポーネントがマウントされたときにすべてのタスクを取得するためのuseEffectフック
   useEffect(() => {
     const getAllTasks = async () => {
-        try {
+      try {
+          //タスクを取得するAPIリクエスト
           const response = await axios.get('http://localhost:3001/api/tasks');
           console.log(response.data);
           setTasks(response.data);
@@ -18,7 +20,7 @@ const TaskList = () => {
     };
 
     getAllTasks();
-}, []);
+  }, []); //空の依存配列で初回マウント時のみ実行
 
 
   return (
@@ -28,7 +30,7 @@ const TaskList = () => {
         {tasks.map((task) => (
           <li key={task.id}>
             <div className="task-title">
-            <Link to={`/tasks/${task.id}`}>{task.title}</Link>
+            <Link to={`/tasks/${task.id}`}>{task.title}</Link> {/* タスクタイトルにタスク詳細ページへ遷移するリンクを設定 */}
             </div>
           </li>
         ))}
