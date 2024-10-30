@@ -2,7 +2,7 @@
 const db = require("../config/database");
 const bcrypt = require("bcrypt"); //パスワードハッシュ化のためのライブラリをインポート
 require('dotenv').config(); //環境変数を読み込む
-const jwt = require("jsonwebtoken"); // JWT生成のためのライブラリをインポート
+const jwt = require("jsonwebtoken"); //JWT生成のためのライブラリをインポート
 
 //データベースクエリをラップする関数
 const dbQuery = (query, params) => {
@@ -14,15 +14,15 @@ const dbQuery = (query, params) => {
   });
 };
 
-// 新しいユーザーを追加する
+//新しいユーザーを追加する
 const insertUser = async (req, res) => {
-  const { userName, password } = req.body; // リクエストボディからユーザー名とパスワードを取得
+  const { userName, password } = req.body; //リクエストボディからユーザー名とパスワードを取得
   if (!userName || !password) {
-      return res.status(400).send("Enter your username and password。"); // ユーザー名またはパスワードがない場合はエラーメッセージ
+      return res.status(400).send("Enter your username and password。"); //ユーザー名またはパスワードがない場合はエラーメッセージ
   }
 
   try {
-    // パスワードをハッシュ化
+    //パスワードをハッシュ化
     const hashedPassword = await bcrypt.hash(password, 10);
     const sqlInsert = "INSERT INTO users (userName, password) VALUES (?, ?)";
     db.query(sqlInsert, [userName, hashedPassword], (err, result) => {
@@ -39,7 +39,7 @@ const insertUser = async (req, res) => {
 };
 
 
-// ログイン処理
+//ログイン処理
 const loginUser = async (req, res) => {
   const { userName, password } = req.body;
   if (!userName || !password) {
