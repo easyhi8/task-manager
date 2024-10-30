@@ -17,9 +17,9 @@ const getAllTasks = (req, res) => {
 
 // 単一のタスクを取得する
 const getTask= (req, res) => {
-  const id = req.params.id; // URLパラメータからIDを取得
+  const taskId = req.params.id; // URLパラメータからIDを取得
   const sqlSelect = "SELECT * FROM tasks WHERE id = ?"
-  db.query(sqlSelect, [id], (err, result) => {
+  db.query(sqlSelect, [taskId], (err, result) => {
       if (err) {
           console.error("データベースエラー:", err);
           res.status(500).send("データベースからタスクを取得中にエラーが発生しました");
@@ -48,26 +48,26 @@ const addTask = (req, res) => {
 
 // タスクを更新する
 const updateTask = (req, res) => {
-  const id = req.params.id; // URLパラメータからIDを取得
+  const taskId = req.params.id; // URLパラメータからIDを取得
   const { title, description, deadline, status } = req.body;
   const sqlUpdate = "UPDATE tasks SET title = ?, description = ?, deadline = ?, status = ? WHERE id = ?"; // タスクのタイトル、説明、期限、ステータスを更新
-  db.query(sqlUpdate, [title, description, deadline, status, id], (err, result) => {
+  db.query(sqlUpdate, [title, description, deadline, status, taskId], (err, result) => {
       if (err) {
           console.error(err);
           res.status(500).send("タスクの更新に失敗しました");
       } else if (result.affectedRows === 0) {
           res.status(404).send("タスクが見つかりません");
       } else {
-          res.send({ id, title, description, deadline, status});
+          res.send({ taskId, title, description, deadline, status});
       }
   });
 };
 
 //  タスクを削除する
 const deleteTask = (req, res) => {
-  const id = req.params.id; // URLパラメータからIDを取得
+  const taskId = req.params.id; // URLパラメータからIDを取得
   const sqlDelete = "DELETE FROM tasks WHERE id = ?";
-  db.query(sqlDelete, [id], (err, result) => {
+  db.query(sqlDelete, [taskId], (err, result) => {
       if (err) {
           console.error(err);
           res.status(500).send("タスクの削除に失敗しました");
