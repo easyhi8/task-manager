@@ -4,18 +4,21 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 const TaskEdit = ({ updateTask }) => {
-    const { id } = useParams();
+    const { id } = useParams();//URLからタスクidを取得
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [deadline, setDeadline] = useState("");
     const [status, setStatus] = useState("");
-    const navigate = useNavigate();
+    const navigate = useNavigate(); //ページ遷移に使用するためのuseNavigateフックを初期化
     
+    //コンポーネントがマウントされたときにタスクの詳細を取得するためのuseEffectフック
     useEffect(() => {
       const getTask = async () => {
-          try {
+        try {
+            //APIからタスク詳細を取得
             const response = await axios.get(`http://localhost:3001/api/tasks/${id}`);
             console.log(response.data);
+            //取得したデータで状態を更新
             setTitle(response.data.title);
             setDescription(response.data.description);
             setDeadline(response.data.deadline);
@@ -26,7 +29,7 @@ const TaskEdit = ({ updateTask }) => {
       };
   
       getTask();
-  }, [id]);
+  }, [id]); //idが変更されたときに再実行
     
     const handleSave = async (e) => {
         if (!title || !description || !deadline || !status) {
@@ -34,6 +37,7 @@ const TaskEdit = ({ updateTask }) => {
               return;
           }
         try {
+            //APIを使用してタスクを更新
             await axios.put(`http://localhost:3001/api/tasks/${id}`, {
                 title,
                 description,
@@ -41,7 +45,7 @@ const TaskEdit = ({ updateTask }) => {
                 status,
             });
             alert("タスクが更新されました");
-            navigate(`/tasks/${id}`);
+            navigate(`/tasks/${id}`); //タスク詳細ページへ遷移
         } catch (error) {
             console.error("タスク更新時のエラー:", error);
         }
@@ -51,7 +55,7 @@ const TaskEdit = ({ updateTask }) => {
       navigate(`/tasks/${id}`);
     };
     
-    const statusOptions = ["未完了", "完了"];
+    const statusOptions = ["未完了", "完了"]; //ステータス選択肢の配列
 
   return (
     <div>
