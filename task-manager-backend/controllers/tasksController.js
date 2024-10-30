@@ -17,7 +17,7 @@ const getAllTasks = (req, res) => {
 
 //単一のタスクを取得する
 const getTask= (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id; //URLパラメータからIDを取得
   const sqlSelect = "SELECT * FROM tasks WHERE id = ?"
   db.query(sqlSelect, [id], (err, result) => {
       if (err) {
@@ -34,7 +34,7 @@ const getTask= (req, res) => {
 
 // 新しいタスクを追加する
 const addTask = (req, res) => {
-    const { title, description, deadline, status } = req.body;
+    const { title, description, deadline, status } = req.body; //リクエストボディからデータを取得
     const sqlInsert = "INSERT INTO tasks (title, description, deadline, status) VALUES (?, ?, ?, ?)";
     db.query(sqlInsert, [title, description, deadline, status], (err, result) => {
         if (err) {
@@ -48,7 +48,7 @@ const addTask = (req, res) => {
 
 // タスクを更新する
 const updateTask = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id; //URLパラメータからIDを取得
   const { title, description, deadline, status } = req.body;
   const sqlUpdate = "UPDATE tasks SET title = ?, description = ?, deadline = ?, status = ? WHERE id = ?";
   db.query(sqlUpdate, [title, description, deadline, status, id], (err, result) => {
@@ -65,7 +65,7 @@ const updateTask = (req, res) => {
 
 // タスクを削除する
 const deleteTask = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id; //URLパラメータからIDを取得
   const sqlDelete = "DELETE FROM tasks WHERE id = ?";
   db.query(sqlDelete, [id], (err, result) => {
       if (err) {
