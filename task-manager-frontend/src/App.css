@@ -1,15 +1,18 @@
+/* App.css */
 /* 全体のスタイル */
-:root {
-  --background-color: #ffffff;
-  --text-color: #333;
-  --box-shadow-color: rgba(0, 0, 0, 0.1);
+
+:root { /*htmlの擬似クラス*/
+  /*カスタムプロパティ*/
+  --background-color: #ffffff; /* 背景カラーの変数 */
+  --text-color: #333; /* テキストカラーの変数 */
+  --box-shadow-color: rgba(0, 0, 0, 0.1); /* ボックスシャドウのカラー */
 }
 
 body {
   height: 100%;
   margin: 0;
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--background-color); /* 背景カラーを変数から取得 */
+  color: var(--text-color); /* テキストカラーを変数から取得 */
 }
 
 .App {
@@ -18,12 +21,14 @@ body {
   max-width: 800px;
   margin: 40px auto;
   font-family: Arial, sans-serif;
-  color: var(--text-color);
+  color: var(--text-color);  /* テキストカラーを変数から取得 */
   padding: 15px 20px;
-  box-shadow: 0 2px 10px var(--box-shadow-color);
+  box-shadow: 0 2px 10px var(--box-shadow-color); /* ボックスシャドウを設定 */
   border-radius: 8px;
-  background-color: var(--background-color);
+  background-color: var(--background-color); /* 背景カラーを変数から取得 */
 }
+
+/* ダークモード対応 */
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -38,6 +43,7 @@ body {
 }
 
 /* フォームのスタイル */
+
 .textBox input,
 .textBox textarea {
   width: 45%;
@@ -46,19 +52,19 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-  font-family: inherit;
+  font-family: inherit; /* 親要素のフォントを引き継ぐ */
 }
 
 .inputRow {
   display: flex;
   justify-content: space-between;
   width: 48%;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /*子要素を折り返す*/
 }
 
 .inputGroup {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* 縦に配置 */
   width: 45%;
 }
 
@@ -74,7 +80,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
-  font-family: inherit;
+  font-family: inherit; /* 親要素のフォントを引き継ぐ */
   margin: 0;
 }
 
@@ -88,7 +94,7 @@ select {
   color: white;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s;  /* 背景カラーの変更にトランジションを追加 */
 }
 
 .buttonContainer {
@@ -97,19 +103,20 @@ select {
   margin-top: 10px;
 }
 
-.textBox button:last-child {
+.textBox button:last-child { /*最後のボタンのスタイル*/
   margin-left: auto;
   align-self: center;
   margin-right: 0;
 }
 
 .textBox button:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* ホバー時の背景色を変更 */
 }
 
 /* リストのスタイル */
+
 ul {
-  list-style-type: none;
+  list-style-type: none; /* リストスタイルをなしに */
   padding-inline-start: 0;
   margin: 0;
   font-size: 23px;
@@ -122,6 +129,7 @@ li {
 }
 
 /* メディアクエリを追加してレスポンシブ対応 */
+
 @media (max-width: 600px) {
   .inputRow {
     width: 93%;
