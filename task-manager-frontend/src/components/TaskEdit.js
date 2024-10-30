@@ -16,7 +16,7 @@ const TaskEdit = ({ updateTask }) => {
       const getTask = async () => {
         try {
             // APIからタスク詳細を取得
-            const response = await axios.get(`http:// localhost:3001/api/tasks/${id}`);
+            const response = await axios.get(`http://localhost:3001/api/tasks/${id}`);
             console.log(response.data);
             // 取得したデータで状態を更新
             setTitle(response.data.title);
@@ -38,7 +38,7 @@ const TaskEdit = ({ updateTask }) => {
           }
         try {
             // APIを使用してタスクを更新
-            await axios.put(`http:// localhost:3001/api/tasks/${id}`, {
+            await axios.put(`http://localhost:3001/api/tasks/${id}`, {
                 title,
                 description,
                 deadline,

@@ -17,7 +17,7 @@ const AuthForm = () => {
                 return;
             }
           try {
-            const response = await axios.post("http:// localhost:3001/api/register", { userName, password });
+            const response = await axios.post("http://localhost:3001/api/register", { userName, password });
             alert("登録成功！");
             const token = response.data.token; // 取得したトークンを取得
             localStorage.setItem("token", token); // トークンをローカルストレージに保存
@@ -40,7 +40,7 @@ const AuthForm = () => {
                 return;
             }
           try {
-            const response = await axios.post("http:// localhost:3001/api/login", { userName, password });
+            const response = await axios.post("http://localhost:3001/api/login", { userName, password });
             alert("ログインに成功しました。");
             const token = response.data.token; // 取得したトークンを取得
             localStorage.setItem("token", token); // トークンをローカルストレージに保存

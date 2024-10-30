@@ -11,7 +11,7 @@ const TaskList = () => {
     const getAllTasks = async () => {
       try {
           // タスクを取得するAPIリクエスト
-          const response = await axios.get('http:// localhost:3001/api/tasks');
+          const response = await axios.get('http://localhost:3001/api/tasks');
           console.log(response.data);
           setTasks(response.data);
         } catch (err) {
