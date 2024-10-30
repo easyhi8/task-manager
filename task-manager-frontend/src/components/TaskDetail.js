@@ -5,13 +5,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import taskService from '../services/taskService';
 
 const TaskDetail = () => {
-  const { id } = useParams();
+  const { id } = useParams(); //URLからタスクのidを取得
   const [task, setTask] = useState({});
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //ページ遷移に使用するためのuseNavigateフックを初期化
 
+  //コンポーネントがマウントされたときにタスクを取得するためのuseEffectフック
   useEffect(() => {
     const getTask = async () => {
-        try {
+      try {
+          //APIからタスク詳細を取得
           const response = await axios.get(`http://localhost:3001/api/tasks/${id}`);
           console.log(response.data);
           setTask(response.data);
@@ -21,23 +23,23 @@ const TaskDetail = () => {
     };
 
     getTask();
-  }, [id]);
+  }, [id]); //idが変更されたときに再実行
   
   const handleEdit = () => {
-    navigate(`/tasks/edit/${id}`);
+    navigate(`/tasks/edit/${id}`); //タスク編集ページへ遷移
 };
   const handleBack = () => {
-    navigate(`/tasks`);
+    navigate(`/tasks`); //タスク一覧ページへ遷移
   };
   
   const handleDelete = () => {
      // 確認ダイアログを表示
     if (window.confirm("このタスクを削除してもよろしいですか？")) {
-      taskService.deleteTask(task.id)
+      taskService.deleteTask(task.id) //タスク削除サービスを呼び出す
           .then(response => {
               console.log(response.data);
               alert("タスクが正常に削除されました")
-              navigate(`/tasks`);
+              navigate(`/tasks`); //タスク一覧ページへ遷移
           })
           .catch(error => {
               console.error("Error deleting task:", error);
