@@ -11,7 +11,7 @@ const AuthForm = () => {
       const navigate = useNavigate();
       
       // ユーザー登録を行う関数
-      const registerClick = async () => {
+      const handleRegister = async () => {
           if (!userName || !password) {
                 alert("ユーザー名とパスワードを入力してください。");
                 return;
@@ -33,7 +33,7 @@ const AuthForm = () => {
       };
   
       // ユーザーログインを行う関数
-      const loginClick = async () => {
+      const handleLogin = async () => {
           // ユーザー名またはパスワードが空の場合アラートを表示
           if (!userName || !password) {
                 alert("ユーザー名とパスワードを入力してください。");
@@ -61,8 +61,8 @@ const AuthForm = () => {
           <div className="textBox">
               <input type="text" placeholder="ユーザー名" value={userName} onChange={(e) => setUserName(e.target.value)} /><br />
               <input type="password" placeholder="パスワード" value={password} onChange={(e) => setPassword(e.target.value)} /><br />
-              <button onClick={registerClick}>登録</button>
-              <button onClick={loginClick}>ログイン</button>
+              <button onClick={handleRegister}>登録</button>
+              <button onClick={handleLogin}>ログイン</button>
           </div>
       </div>
       );

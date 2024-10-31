@@ -17,7 +17,7 @@ const TaskForm = ({ addTask }) => {
       setDeadline(today); // 期限に設定
   }, []);
     
-    const handleClick = (e) => {
+    const handleAddTask = (e) => {
         if (!title || !description || !deadline || !status) {
               alert("すべてのフィールドを入力してください");
               return;
@@ -63,7 +63,7 @@ const TaskForm = ({ addTask }) => {
                 </div>
             </div>
             <div className="buttonContainer" >
-              <button onClick={handleClick}>追加</button>
+              <button onClick={handleAddTask}>追加</button>
               <button onClick={handleLogout}>ログアウト</button>
             </div>
         </div>
