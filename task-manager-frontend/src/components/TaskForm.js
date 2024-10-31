@@ -15,30 +15,31 @@ const TaskForm = ({ addTask }) => {
     useEffect(() => {
       const today = new Date().toISOString().split('T')[0]; // 今日の日付を取得
       setDeadline(today); // 期限に設定
-  }, []);
+    }, []);
+  
+    // フォームの状態をリセットする関数
+    const resetForm = () => {
+      setTitle("");
+      setDescription("");
+      setDeadline(new Date().toISOString().split('T')[0]); // 期限を今日の日付にリセット
+      setStatus(statusOptions[0]);
+    };
     
-    const handleAddTask = (e) => {
+    const handleAddTask = async () => {
         if (!title || !description || !deadline || !status) {
               alert("すべてのフィールドを入力してください");
               return;
           }
         console.log("Sending data:", { title, description, deadline, status });
-        taskService.addTask(title, description, deadline, status) // タスクを追加するためのAPI呼び出し
-        .then(response => {
-            console.log(response.data);
-            alert("タスクが正常に追加されました")
-            window.location.reload() // ページをリロードして新しいタスクを表示
-        })
-        .catch(error => {
-            console.error("Error adding task:", error);
-            alert("タスクの追加中にエラーが発生しました");
-        });
-        
-        //  フォームをリセット
-        setTitle("");
-        setDescription("");
-        setDeadline(new Date().toISOString().split('T')[0]); // 期限を今日の日付にリセット
-        setStatus(statusOptions[0]);
+        try {
+          const response = await taskService.addTask(title, description, deadline, status); // タスクを追加するためのAPI呼び出し
+          console.log(response.data);
+          alert("タスクが正常に追加されました");
+          resetForm(); // フォームをリセット
+      } catch (error) {
+          console.error("Error adding task:", error);
+          alert("タスクの追加中にエラーが発生しました");
+      }
     };
     
     const handleLogout = () => {

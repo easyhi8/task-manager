@@ -48,7 +48,16 @@ const TaskDetail = () => {
     } else {
       console.log("タスクの削除がキャンセルされました");
   }
-};
+  };
+  
+  // 期限をyyyy/mm/dd形式に変換する関数
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 月は0から始まるため +1
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}/${month}/${day}`;
+  };
 
   return (
     <div>
@@ -56,6 +65,7 @@ const TaskDetail = () => {
         <div className="textBox">
             <h3>{task.title}</h3>
             <p>{task.description}</p>
+            <span>期限：{formatDate(task.deadline)}</span>　<span >ステータス：{task.status}</span>
             <div className="buttonContainer">
               <button onClick={handleEdit}>編集</button>
               <button onClick={handleBack}>戻る</button>

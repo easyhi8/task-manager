@@ -5,8 +5,8 @@ const getAllTasks = () => {
     return Axios.get("http://localhost:3001/api/get/tasks"); // APIエンドポイントからすべてタスクを取得
 };
 
-const getTask = (id,title, description,deadline, status) => {
-  return Axios.get(`http://localhost:3001/api/tasks/${id}`, { title, description,deadline, status }); // 指定したidのタスクを取得
+const getTask = (id) => {
+  return Axios.get(`http://localhost:3001/api/tasks/${id}`); // 指定したidのタスクを取得
 };
 
 const addTask = (title, description,deadline, status) => {
