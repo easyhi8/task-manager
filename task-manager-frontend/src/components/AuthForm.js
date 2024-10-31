@@ -13,14 +13,14 @@ const AuthForm = () => {
       // ユーザー登録とログインを行う共通関数
     const handleAuth = async (isRegister) => { // isRegister引数を使って登録とログインのどちらの処理かを判断
       if (!userName || !password) {
-          alert("ユーザー名とパスワードを入力してください。");
+          alert("ユーザー名とパスワードを入力してください");
           return;
       }
 
       try {
           const endpoint = isRegister ? "register" : "login"; // 変数を用いて、登録かログインかに応じたAPIエンドポイントを簡素化
           const response = await axios.post(`http://localhost:3001/api/${endpoint}`, { userName, password });
-          alert(isRegister ? "登録成功！" : "ログインに成功しました。"); // メッセージも共通化
+          alert(isRegister ? "登録が成功しました" : "ログインに成功しました"); // メッセージも共通化
 
           // 取得したトークンをローカルストレージに保存
           const token = response.data.token;
@@ -28,7 +28,7 @@ const AuthForm = () => {
           // タスク管理ページへ遷移
           navigate("/tasks");
       } catch (error) {
-          alert(isRegister ? "登録に失敗しました。" : "ログインに失敗しました。");
+          alert(isRegister ? "登録が失敗しました" : "ログインに失敗しました");
           console.error(error);
       }
 
