@@ -10,45 +10,27 @@ const AuthForm = () => {
       // ページ遷移に使うuseNavigateフックを初期化
       const navigate = useNavigate();
       
-      // ユーザー登録を行う関数
-      const handleRegister = async () => {
-          if (!userName || !password) {
-                alert("ユーザー名とパスワードを入力してください。");
-                return;
-            }
-          try {
-            const response = await axios.post("http://localhost:3001/api/register", { userName, password });
-            alert("登録成功！");
-            const token = response.data.token; // 取得したトークンを取得
-            localStorage.setItem("token", token); // トークンをローカルストレージに保存
-            navigate("/tasks"); // タスク管理ページへ遷移
-        } catch (error) {
-            alert("登録に失敗しました。");
-            console.error(error);
-        }
-  
-          // 入力フィールドをリセット
-          setUserName("");
-          setPassword("");
-      };
-  
-      // ユーザーログインを行う関数
-      const handleLogin = async () => {
-          // ユーザー名またはパスワードが空の場合アラートを表示
-          if (!userName || !password) {
-                alert("ユーザー名とパスワードを入力してください。");
-                return;
-            }
-          try {
-            const response = await axios.post("http://localhost:3001/api/login", { userName, password });
-            alert("ログインに成功しました。");
-            const token = response.data.token; // 取得したトークンを取得
-            localStorage.setItem("token", token); // トークンをローカルストレージに保存
-            navigate("/tasks");
-        } catch (error) {
-            alert("ログインに失敗しました。");
-            console.error(error);
-        }
+      // ユーザー登録とログインを行う共通関数
+    const handleAuth = async (isRegister) => { // isRegister引数を使って登録とログインのどちらの処理かを判断
+      if (!userName || !password) {
+          alert("ユーザー名とパスワードを入力してください。");
+          return;
+      }
+
+      try {
+          const endpoint = isRegister ? "register" : "login"; // 変数を用いて、登録かログインかに応じたAPIエンドポイントを簡素化
+          const response = await axios.post(`http://localhost:3001/api/${endpoint}`, { userName, password });
+          alert(isRegister ? "登録成功！" : "ログインに成功しました。"); // メッセージも共通化
+
+          // 取得したトークンをローカルストレージに保存
+          const token = response.data.token;
+          localStorage.setItem("token", token);
+          // タスク管理ページへ遷移
+          navigate("/tasks");
+      } catch (error) {
+          alert(isRegister ? "登録に失敗しました。" : "ログインに失敗しました。");
+          console.error(error);
+      }
 
         // 入力フィールドをリセット
         setUserName("");
@@ -61,8 +43,8 @@ const AuthForm = () => {
           <div className="textBox">
               <input type="text" placeholder="ユーザー名" value={userName} onChange={(e) => setUserName(e.target.value)} /><br />
               <input type="password" placeholder="パスワード" value={password} onChange={(e) => setPassword(e.target.value)} /><br />
-              <button onClick={handleRegister}>登録</button>
-              <button onClick={handleLogin}>ログイン</button>
+              <button onClick={() => handleAuth(true)}>登録</button>
+              <button onClick={() => handleAuth(false)}>ログイン</button>
           </div>
       </div>
       );
