@@ -18,7 +18,7 @@ const dbQuery = (query, params) => {
 const insertUser = async (req, res) => {
   const { userName, password } = req.body; // リクエストボディからユーザー名とパスワードを取得
   if (!userName || !password) {
-      return res.status(400).send("Enter your username and password。"); // ユーザー名またはパスワードがない場合はエラーメッセージ
+      return res.status(400).send("ユーザー名とパスワードを入力してください"); // ユーザー名またはパスワードがない場合はエラーメッセージ
   }
 
   try {
@@ -28,13 +28,13 @@ const insertUser = async (req, res) => {
     db.query(sqlInsert, [userName, hashedPassword], (err, result) => {
         if (err) {
             console.error(err);
-            return res.status(500).send("Failed to insert new user");
+            return res.status(500).send("新しいユーザーの追加に失敗しました");
         }
-        return res.status(201).send("User added successfully");
+        return res.status(201).send("ユーザーが正常に追加されました");
     });
   } catch (error) {
       console.error(error);
-      return res.status(500).send("Error hashing password");
+      return res.status(500).send("パスワードのハッシュエラー");
   }
 };
 
@@ -43,7 +43,7 @@ const insertUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { userName, password } = req.body;
   if (!userName || !password) {
-      return res.status(400).send("Enter your username and password");
+      return res.status(400).send("ユーザー名とパスワードを入力してください");
   }
 
   try {
@@ -51,14 +51,14 @@ const loginUser = async (req, res) => {
     const results = await dbQuery("SELECT * FROM users WHERE userName = ?", [userName]);
 
     if (results.length === 0) {
-        return res.status(401).send("Incorrect username or password"); // ユーザーが存在しない場合のエラーメッセージ
+        return res.status(401).send("ユーザー名またはパスワードが間違っています"); // ユーザーが存在しない場合のエラーメッセージ
     }
 
     const user = results[0]; // ユーザー情報を取得
     const match = await bcrypt.compare(password, user.password); // パスワードを比較
 
     if (!match) {
-        return res.status(401).send("Incorrect username or password"); // パスワードが一致しない場合のエラーメッセージ
+        return res.status(401).send("ユーザー名またはパスワードが間違っています"); // パスワードが一致しない場合のエラーメッセージ
     }
 
     // JWTを生成し、ユーザーIDをペイロードに含める
@@ -66,7 +66,7 @@ const loginUser = async (req, res) => {
     res.json({ message: "ログイン成功", token }); // 成功メッセージとトークンを返す
   } catch (error) {
     console.error(error);
-    return res.status(500).send("Faild to login");
+    return res.status(500).send("ログインに失敗しました");
   }
 };
 
