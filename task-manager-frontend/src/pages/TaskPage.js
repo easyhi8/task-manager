@@ -5,15 +5,14 @@ import TaskList from "../components/TaskList";
 import taskService from "../services/taskService";
 
 function TaskPage() {
-  const addTask = (title, description) => {
-      taskService.addTask(title, description) // タスク追加のサービスメソッドを呼び出す
-          .then(() => {
-              alert("Task added successfully");
-          })
-          .catch(err => {
-              console.error("Error adding task: ", err);
-              alert("Failed to add task");
-          });
+  const addTask = async (title, description) => {
+    try {
+      await taskService.addTask(title, description); // タスク追加のサービスメソッドを呼び出す
+      alert("タスクが正常に追加されました");
+    } catch (err) {
+      console.error("タスク追加時のエラー:", err);
+      alert("タスクの追加に失敗しました");
+    }
   };
 
 return (
