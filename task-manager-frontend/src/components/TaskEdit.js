@@ -33,7 +33,7 @@ const TaskEdit = ({ updateTask }) => {
     
     const handleSave = async (e) => {
         if (!title || !description || !deadline || !status) {
-              alert("タイトルと説明を入力してください。");
+              alert("タスクタイトルとタスクの説明を入力してください");
               return;
           }
         try {
