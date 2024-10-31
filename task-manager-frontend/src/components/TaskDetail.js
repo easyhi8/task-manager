@@ -65,8 +65,7 @@ const TaskDetail = () => {
         <div className="textBox">
             <h3>{task.title}</h3>
             <p>{task.description}</p>
-            <p>期限：{formatDate(task.deadline)}</p>
-            <p >ステータス：{task.status}</p>
+            <span>期限：{formatDate(task.deadline)}</span>　<span >ステータス：{task.status}</span>
             <div className="buttonContainer">
               <button onClick={handleEdit}>編集</button>
               <button onClick={handleBack}>戻る</button>
