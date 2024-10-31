@@ -16,5 +16,5 @@ app.use("/api", taskRoutes);
 app.use("/api", authRoutes);
 
 app.listen(3001, () => {
-    console.log('Server running on port 3001');
+  console.log("Server running on port 3001");
 });

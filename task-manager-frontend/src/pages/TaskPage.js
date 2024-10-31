@@ -15,12 +15,13 @@ function TaskPage() {
     }
   };
 
-return (
-  <div className="taskPage">
-          <h1>タスク管理ページ</h1>
-          <TaskList /> {/* タスク一覧コンポーネントを表示 */}
-          <TaskForm addTask={addTask} /> {/* タスク追加フォームを表示。addTask関数をpropとして渡す */}
-  </div>
+  return (
+    <div className="taskPage">
+      <h1>タスク管理ページ</h1>
+      <TaskList /> {/* タスク一覧コンポーネントを表示 */}
+      <TaskForm addTask={addTask} />{" "}
+      {/* タスク追加フォームを表示。addTask関数をpropとして渡す */}
+    </div>
   );
 }
 
