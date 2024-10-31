@@ -5,10 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 const TaskEdit = ({ updateTask }) => {
     const { id } = useParams();// URLからタスクidを取得
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [deadline, setDeadline] = useState("");
-    const [status, setStatus] = useState("");
+    const [task, setTask] = useState({ title: "", description: "", deadline: "", status: "" });
     const navigate = useNavigate(); // ページ遷移に使用するためのuseNavigateフックを初期化
 
     const API_BASE_URL = "http://localhost:3001/api/tasks";
@@ -21,10 +18,7 @@ const TaskEdit = ({ updateTask }) => {
             const response = await axios.get(`${API_BASE_URL}/${id}`);
             console.log(response.data);
             // 取得したデータで状態を更新
-            setTitle(response.data.title);
-            setDescription(response.data.description);
-            setDeadline(response.data.deadline);
-            setStatus(response.data.status);
+            setTask(response.data);
           } catch (err) {
               console.error("タスク取得時のエラー:", err.response ? err.response.data : err.message);
           }
@@ -34,6 +28,7 @@ const TaskEdit = ({ updateTask }) => {
     }, [id]); // idが変更されたときに再実行
     
     const handleSave = async (e) => {
+        const { title, description, deadline, status } = task;
         if (!title || !description || !deadline || !status) {
               alert("タスクタイトルとタスクの説明を入力してください");
               return;
@@ -64,17 +59,17 @@ const TaskEdit = ({ updateTask }) => {
         <h2>タスク編集</h2>
         <div className="textBox">
             タスクタイトル<br/>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} /><br />
+            <input type="text" value={task.title} onChange={(e) => setTask(e.target.value)} /><br />
             タスク内容<br/>
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows="2" /><br />
+            <textarea value={task.description} onChange={(e) => setTask(e.target.value)} rows="2" /><br />
             <div className="inputRow">
               <div className="inputGroup">
                 <label>期限</label>
-                <input type="date" id="dateInput" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
+                <input type="date" id="dateInput" value={task.deadline} onChange={(e) => setTask(e.target.value)} />
               </div>
               <div className="inputGroup">
                 <label>ステータス</label>
-                <select value={status} onChange={(e) => setStatus(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
+                <select value={task.status} onChange={(e) => setTask(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
               </div>
             </div>
             <div className="buttonContainer">
