@@ -10,6 +10,8 @@ const AuthForm = () => {
       // ページ遷移に使うuseNavigateフックを初期化
       const navigate = useNavigate();
       
+      const API_BASE_URL = "http://localhost:3001/api";
+      
       // ユーザー登録とログインを行う共通関数
     const handleAuth = async (isRegister) => { // isRegister引数を使って登録とログインのどちらの処理かを判断
       if (!userName || !password) {
@@ -19,22 +21,22 @@ const AuthForm = () => {
 
       try {
           const endpoint = isRegister ? "register" : "login"; // 変数を用いて、登録かログインかに応じたAPIエンドポイントを簡素化
-          const response = await axios.post(`http://localhost:3001/api/${endpoint}`, { userName, password });
+          const response = await axios.post(`${API_BASE_URL}/${endpoint}`, { userName, password });
           alert(isRegister ? "登録が成功しました" : "ログインに成功しました"); // メッセージも共通化
 
           // 取得したトークンをローカルストレージに保存
           const token = response.data.token;
           localStorage.setItem("token", token);
           // タスク管理ページへ遷移
-          navigate("/tasks");
+        navigate("/tasks");
+        
+        // 入力フィールドをリセット
+        setUserName("");
+        setPassword("");
       } catch (error) {
           alert(isRegister ? "登録が失敗しました" : "ログインに失敗しました");
           console.error(error);
       }
-
-        // 入力フィールドをリセット
-        setUserName("");
-        setPassword("");
       };
 
     return (

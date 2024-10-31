@@ -10,13 +10,15 @@ const TaskEdit = ({ updateTask }) => {
     const [deadline, setDeadline] = useState("");
     const [status, setStatus] = useState("");
     const navigate = useNavigate(); // ページ遷移に使用するためのuseNavigateフックを初期化
+
+    const API_BASE_URL = "http://localhost:3001/api/tasks";
     
     // コンポーネントがマウントされたときにタスクの詳細を取得するためのuseEffectフック
     useEffect(() => {
       const getTask = async () => {
         try {
             // APIからタスク詳細を取得
-            const response = await axios.get(`http://localhost:3001/api/tasks/${id}`);
+            const response = await axios.get(`${API_BASE_URL}/${id}`);
             console.log(response.data);
             // 取得したデータで状態を更新
             setTitle(response.data.title);
@@ -38,7 +40,7 @@ const TaskEdit = ({ updateTask }) => {
           }
         try {
             // APIを使用してタスクを更新
-            await axios.put(`http://localhost:3001/api/tasks/${id}`, {
+            await axios.put(`${API_BASE_URL}/${id}`, {
                 title,
                 description,
                 deadline,

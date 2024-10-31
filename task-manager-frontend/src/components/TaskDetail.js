@@ -9,12 +9,14 @@ const TaskDetail = () => {
   const [task, setTask] = useState({});
   const navigate = useNavigate(); // ページ遷移に使用するためのuseNavigateフックを初期化
 
+  const API_BASE_URL = "http://localhost:3001/api/tasks";
+
   // コンポーネントがマウントされたときにタスクを取得するためのuseEffectフック
   useEffect(() => {
     const getTask = async () => {
       try {
           // APIからタスク詳細を取得
-          const response = await axios.get(`http://localhost:3001/api/tasks/${id}`);
+          const response = await axios.get(`${API_BASE_URL}/${id}`);
           console.log(response.data);
           setTask(response.data);
         } catch (err) {

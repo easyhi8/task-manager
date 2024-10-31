@@ -6,12 +6,14 @@ import { Link } from "react-router-dom";
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
 
+  const API_BASE_URL = "http://localhost:3001/api/tasks";
+
   // コンポーネントがマウントされたときにすべてのタスクを取得するためのuseEffectフック
   useEffect(() => {
     const getAllTasks = async () => {
       try {
           // タスクを取得するAPIリクエスト
-          const response = await axios.get('http://localhost:3001/api/tasks');
+          const response = await axios.get(`${API_BASE_URL}`);
           console.log(response.data);
           setTasks(response.data);
         } catch (err) {
