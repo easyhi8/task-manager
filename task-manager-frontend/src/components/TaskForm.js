@@ -5,27 +5,22 @@ import taskService from '../services/taskService';
 
 const TaskForm = ({ addTask }) => {
     const statusOptions = ["未完了", "完了"]; // ステータス選択肢の配列
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [deadline, setDeadline] = useState("");
-    const [status, setStatus] = useState(statusOptions[0]);
+    const [task, setTask] = useState({ title: "", description: "", deadline: "", status: statusOptions[0], });
     const navigate = useNavigate(); // ページ遷移に使用するためのuseNavigateフックを初期化
     
     // コンポーネントがマウントされたときに期限を今日の日付に設定するためのuseEffectフック
     useEffect(() => {
       const today = new Date().toISOString().split('T')[0]; // 今日の日付を取得
-      setDeadline(today); // 期限に設定
+      setTask((prev) => ({ ...prev, deadline: today })); // 期限を今日の日付に設定
     }, []);
   
     // フォームの状態をリセットする関数
     const resetForm = () => {
-      setTitle("");
-      setDescription("");
-      setDeadline(new Date().toISOString().split('T')[0]); // 期限を今日の日付にリセット
-      setStatus(statusOptions[0]);
+      setTask({ title: "", description: "", deadline: new Date().toISOString().split('T')[0], status: statusOptions[0], });
     };
     
     const handleAddTask = async () => {
+        const { title, description, deadline, status } = task;
         if (!title || !description || !deadline || !status) {
               alert("すべてのフィールドを入力してください");
               return;
@@ -51,16 +46,16 @@ const TaskForm = ({ addTask }) => {
     <div>
         <h2>タスクの新規追加</h2>
         <div className="textBox">
-            <input type="text" placeholder="タスクタイトル" value={title} onChange={(e) => setTitle(e.target.value)} /><br />
-            <textarea placeholder="タスクの説明" value={description} onChange={(e) => setDescription(e.target.value)} rows="2" /><br />
+            <input type="text" placeholder="タスクタイトル" value={task.title} onChange={(e) => setTask(e.target.value)} /><br />
+            <textarea placeholder="タスクの説明" value={task.description} onChange={(e) => setTask(e.target.value)} rows="2" /><br />
             <div className="inputRow">
               <div className="inputGroup">
                 <label>期限</label>
-                <input type="date" id="dateInput" value={deadline} onChange={(e) => setDeadline(e.target.value)} />
+                <input type="date" id="dateInput" value={task.deadline} onChange={(e) => setTask(e.target.value)} />
               </div>
                 <div className="inputGroup">
                   <label>ステータス</label>
-                  <select value={status} onChange={(e) => setStatus(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
+                  <select value={task.status} onChange={(e) => setTask(e.target.value)}>{statusOptions.map((option) => (<option key={option} value={option}>{option}</option>))}</select>
                 </div>
             </div>
             <div className="buttonContainer" >
