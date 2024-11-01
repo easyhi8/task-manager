@@ -14,10 +14,8 @@ const insertUser = async (req, res) => {
   try {
     // パスワードをハッシュ化
     const hashedPassword = await bcrypt.hash(password, 10);
-    db.query(sqlInsert, [userName, hashedPassword], (err, result) => {
       await addUser(userName, hashedPassword);
       return res.status(201).send("ユーザーが正常に追加されました");
-    });
   } catch (error) {
     console.error(error);
     return res.status(500).send("パスワードのハッシュエラー");
