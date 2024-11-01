@@ -1,18 +1,8 @@
 // authController.js
-const db = require("../config/database");
 const bcrypt = require("bcrypt"); // パスワードハッシュ化のためのライブラリをインポート
-require("dotenv").config(); // 環境変数を読み込む
 const jwt = require("jsonwebtoken"); // JWT生成のためのライブラリをインポート
-
-// データベースクエリをラップする関数
-const dbQuery = (query, params) => {
-  return new Promise((resolve, reject) => {
-    db.query(query, params, (err, results) => {
-      if (err) return reject(err);
-      resolve(results);
-    });
-  });
-};
+const { addUser, getUser } = require("../models/userModel");
+require("dotenv").config(); // 環境変数を読み込む
 
 // 新しいユーザーを追加する
 const insertUser = async (req, res) => {
@@ -24,12 +14,8 @@ const insertUser = async (req, res) => {
   try {
     // パスワードをハッシュ化
     const hashedPassword = await bcrypt.hash(password, 10);
-    const sqlInsert = "INSERT INTO users (userName, password) VALUES (?, ?)";
     db.query(sqlInsert, [userName, hashedPassword], (err, result) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).send("新しいユーザーの追加に失敗しました");
-      }
+      await addUser(userName, hashedPassword);
       return res.status(201).send("ユーザーが正常に追加されました");
     });
   } catch (error) {
@@ -47,10 +33,7 @@ const loginUser = async (req, res) => {
 
   try {
     // ユーザー名に基づいてユーザーをデータベースから取得
-    const results = await dbQuery("SELECT * FROM users WHERE userName = ?", [
-      userName,
-    ]);
-
+    const results = await getUser(userName);
     if (results.length === 0) {
       return res.status(401).send("ユーザー名またはパスワードが間違っています"); // ユーザーが存在しない場合のエラーメッセージ
     }
