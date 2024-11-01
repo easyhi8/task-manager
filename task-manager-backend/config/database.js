@@ -7,7 +7,7 @@ const db = mysql.createPool({
   host: process.env.DB_HOST, // データベースサーバーのホスト名
   user: process.env.DB_USER, // データベースに接続するためのユーザー名
   password: process.env.DB_PASSWORD, // データベースユーザーのパスワード
-  database: proces.env.DB_NAME, // 接続するデータベース名
+  database: process.env.DB_NAME, // 接続するデータベース名
 });
 
 module.exports = db;
