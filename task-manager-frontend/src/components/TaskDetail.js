@@ -18,7 +18,9 @@ const TaskDetail = () => {
         // APIからタスク詳細を取得
         const response = await axios.get(`${API_BASE_URL}/${id}`);
         console.log(response.data);
-        setTask(response.data);
+
+        // ここで最初の要素を取り出す
+        setTask(response.data[0]); // 配列の最初の要素を設定
       } catch (err) {
         console.error(
           "タスク取得時のエラー:",
@@ -26,7 +28,6 @@ const TaskDetail = () => {
         );
       }
     };
-
     getTask();
   }, [id]); // idが変更されたときに再実行
 

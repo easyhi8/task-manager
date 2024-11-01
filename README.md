@@ -41,14 +41,17 @@
 - **`task-manager-backend/`**  
   バックエンドのディレクトリ
 
-  - **`routes/`**
-    - `auth.js` : 認証関連のAPIルートを定義するファイル。authController.js のメソッド（login や register）を呼び出し、ユーザーのログインや登録を処理します。
-    - `task.js` : タスク関連のAPIルートを定義するファイル。tasksController.js の各メソッド（例えば getAllTasks や createTask）を呼び出し、/tasks というエンドポイントでタスク操作を処理します。
   - **`controllers/`**
     - `authController.js` : ユーザーのデータ操作に関するロジックをまとめたファイル
     - `taskController.js` : タスクに関するAPIのビジネスロジックを実装するコントローラ。GET /tasks でタスク一覧を取得したり、POST /tasks で新しいタスクを作成するなどの操作を行います。
   - **`config/`**
     - `database.js` : MySQLデータベースへの接続情報を設定するファイル。ホスト名、ユーザー名、パスワード、データベース名などが設定されます。
+  - **`models/`**
+    - `taskModel.js` : タスクに関するデータベース操作を定義するモデル。getAllTasks、addTask、updateTask、deleteTask など、MySQLデータベースでのCRUD操作を実装します。
+    - `userModel.js` : ユーザーに関するデータベース操作を定義するモデル。ユーザー情報の取得や作成を行い、認証処理のために使用されます。
+  - **`routes/`**
+    - `auth.js` : 認証関連のAPIルートを定義するファイル。authController.js のメソッド（login や register）を呼び出し、ユーザーのログインや登録を処理します。
+    - `task.js` : タスク関連のAPIルートを定義するファイル。tasksController.js の各メソッド（例えば getAllTasks や createTask）を呼び出し、/tasks というエンドポイントでタスク操作を処理します。
   - `app.js` : サーバーのメインファイル。APIルートの設定やサーバー起動を行う。
   - `server.js` : Expressサーバーを起動するエントリーポイント。app.js をインポートし、サーバーを起動してリクエストを待ち受けます。
 
